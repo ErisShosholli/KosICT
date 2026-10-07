@@ -1,0 +1,2 @@
+import { defineConfig } from '@playwright/test';
+export default defineConfig({testDir:'./web/test',workers:1,use:{baseURL:'http://127.0.0.1:5173',launchOptions:{executablePath:process.env.CHROMIUM_PATH || '/usr/bin/chromium',args:['--no-sandbox']}},webServer:{command:'npm run demo',url:'http://127.0.0.1:5173',timeout:30000,env:{DB_PATH:`/tmp/edepo-browser-${Date.now()}.sqlite`}},reporter:'list'});
