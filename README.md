@@ -2,7 +2,22 @@
 
 A complete local inventory demo for Nuka Selection, built for KosICT 2026's Future Developer Corner. React dashboard + Express REST API + SQLite + a Python/Pandas/FastAPI Excel ingestion service. Team: Eren, Inara, Ari.
 
-## Install and run
+## Windows setup (Command Prompt)
+
+Install Node.js 24+ and Python 3.12+ first. Download the latest main-branch ZIP and extract it completely. Open Command Prompt in the folder containing `package.json`, `package-lock.json`, and `README.md` (an extraction tool may create a nested `KosICT-main` folder). Confirm with `dir package.json`. If it is missing, locate the project with `dir /s /b package.json` and change to that folder; do not run npm in the outer extraction folder.
+
+```bat
+node --version
+py --version
+npm ci
+py -m venv .venv
+.venv\Scripts\python.exe -m pip install -r ingestion\requirements.lock.txt
+npm run demo
+```
+
+Open http://localhost:5173 in your browser. If `py` is unavailable, install Python from python.org, enable its PATH option, reopen Command Prompt, and use `python` instead of `py`. The launcher selects the correct virtual-environment Python for Windows or Linux/macOS.
+
+## Install and run (Linux/macOS)
 
 Requires Node.js 24+, Python 3.12+, and npm.
 
