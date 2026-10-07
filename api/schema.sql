@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS products (
   current_stock INTEGER NOT NULL DEFAULT 0 CHECK(current_stock >= 0),
   reorder_level INTEGER NOT NULL DEFAULT 5 CHECK(reorder_level >= 0),
   version INTEGER NOT NULL DEFAULT 0,
+  deleted_at TEXT,
   updated_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now'))
 );
 CREATE INDEX IF NOT EXISTS products_category ON products(category);

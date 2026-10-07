@@ -52,9 +52,11 @@ npm run web
 
 Use a separate demo database for rehearsals (`DB_PATH=/tmp/edepo-rehearsal.sqlite npm run demo`) so real data stays separate. Stop the current demo before starting another on the same ports. For a fresh rehearsal, choose a new database filename.
 
-## Dashboard
+## Inventory workspace
 
-Dark theme, lime accents, responsive inventory cards, category tabs (Bedding, Living space, Decor), instant client-side search across names/SKUs/fabrics/dimensions, stock totals and reorder alerts. Accessible labels and status messages accompany optimistic stock actions. Failures roll back the local change; conflicts show current server stock. Refresh reconciles uncertain network outcomes. This is a single-user pitch workflow; other browser sessions refresh to see changes.
+A focused dark interface with product search, category tabs, stock filters, sorting and quantity controls. Create products with **New product**; click a name or its pencil button to edit all variant fields. Delete requires confirmation and removes the product from inventory while retaining its stock history. Archived SKUs remain reserved. Team credits, owner labels, event banners and promotional copy are removed from the application.
+
+Product creation and editing validate SKU uniqueness, category and nonnegative integer quantities. Updates and deletes require the latest version to prevent overwriting another change. Editing stock records the adjustment in the movement history. Existing databases migrate automatically without resetting inventory.
 
 ## Schema
 
@@ -65,6 +67,10 @@ Dark theme, lime accents, responsive inventory cards, category tabs (Bedding, Li
 - `GET /api/health`: confirms database connectivity.
 - `GET /api/products?category=bedding&q=sheet`: category filter and case-insensitive name/SKU lookup.
 - `PATCH /api/products/:id/stock`: atomic adjustment, returning the updated product.
+- `POST /api/products`: create a product.
+- `GET /api/products/:id`: read an active product.
+- `PUT /api/products/:id`: update product fields and stock with `expectedVersion`.
+- `DELETE /api/products/:id`: archive a product with `expectedVersion`; preserves movement history.
 - `POST /api/products/import`: validates and inserts a complete batch of 1–5000 products. Duplicate SKUs or any invalid row reject the whole batch.
 
 ```sh
